@@ -1,4 +1,4 @@
-const Rf95 = require('rh_rf95');
+const { SX127x } = require('sx127x-raspi');
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -7,18 +7,23 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-const rf95 = new Rf95();
+const sx127x = new SX127x({
+  frequency: 433E6, // Frecuencia LoRa
+  spreadingFactor: 7, // Factor de propagación
+  signalBandwidth: 125E3, // Ancho de banda de la señal
+  dio0Pin: 18, // Pin DIO0
+  resetPin: 14, // Pin de reinicio
+  syncWord: 0x12, // Palabra de sincronización
+});
 
 io.on('connection', (socket) => {
   console.log('Usuario conectado');
 });
 
-rf95.init();
-rf95.setFrequency(433E6);
-rf95.setTxPower(14, false);
+sx127x.open();
 
-rf95.on('data', (data) => {
-  const randomValue = data.readUInt8(0);
+sx127x.on('data', (data) => {
+  const randomValue = data[0];
   io.emit('message', randomValue);
 });
 
