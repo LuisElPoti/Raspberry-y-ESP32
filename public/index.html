@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoRa Data Viewer</title>
+</head>
+<body>
+  <h1>LoRa Data Viewer</h1>
+  <div id="data-container"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('connect', () => {
+      console.log('Conectado al servidor');
+    });
+
+    socket.on('message', (randomValue) => {
+      const dataContainer = document.getElementById('data-container');
+      const newData = document.createElement('p');
+      newData.textContent = `Random Value: ${randomValue}`;
+      dataContainer.appendChild(newData);
+    });
+  </script>
+</body>
+</html>
