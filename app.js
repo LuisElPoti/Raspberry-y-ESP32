@@ -3,6 +3,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const { SerialPort } = require('serialport')
 const { ReadlineParser } = require('@serialport/parser-readline');
+const ejs = require('ejs'); // Agrega esta línea para importar 'ejs'
+
 
 const app = express();
 const server = http.createServer(app);
