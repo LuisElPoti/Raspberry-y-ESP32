@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const { SerialPort } = require('serialport')
-const { Readline } = require('@serialport/parser-readline');
+const { ReadlineParser } = require('@serialport/parser-readline');
 
 const app = express();
 const server = http.createServer(app);
@@ -11,7 +11,7 @@ const io = socketIo(server);
 // Configurar el puerto serie para el módulo LoRa
 const portName = '/dev/ttyAMA0'; // Cambia esto según tu configuración
 const serialPort = new SerialPort({path: portName,  baudRate: 115200} );
-const parser = serialPort.pipe(new Readline({ delimiter: '\n' }));
+const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
 let valorAleatorio = null;
 
