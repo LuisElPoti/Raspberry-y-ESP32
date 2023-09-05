@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const SerialPort = require('serialport');
+const { SerialPort } = require('serialport')
 const Readline = require('@serialport/parser-readline');
 
 const app = express();
@@ -10,7 +10,7 @@ const io = socketIo(server);
 
 // Configurar el puerto serie para el módulo LoRa
 const portName = '/dev/ttyAMA0'; // Cambia esto según tu configuración
-const serialPort = new SerialPort(portName, { baudRate: 115200 });
+const serialPort = new SerialPort({path: portName,  baudRate: 115200} );
 const parser = serialPort.pipe(new Readline({ delimiter: '\n' }));
 
 let valorAleatorio = null;
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.render('index', { valor: valorAleatorio });
 });
 
-// Escuchar datos del puerto serie
+// Escuchar datos del puerto serienpm i 
 parser.on('data', (data) => {
   valorAleatorio = data.trim(); // Elimina los espacios en blanco y saltos de línea
   console.log("Valor recibido del ESP32: " + valorAleatorio);
