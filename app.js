@@ -3,7 +3,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const { SerialPort } = require('serialport')
 const { ReadlineParser } = require('@serialport/parser-readline');
-const ejs = require('ejs'); // Agrega esta línea para importar 'ejs'
+
 
 
 const app = express();
@@ -17,12 +17,11 @@ const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
 let valorAleatorio = null;
 
-// Configurar la vista de la página web
-app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('index', { valor: valorAleatorio });
+  res.json({ valor: valorAleatorio });
 });
+
 
 // Escuchar datos del puerto serienpm i 
 parser.on('data', (data) => {
