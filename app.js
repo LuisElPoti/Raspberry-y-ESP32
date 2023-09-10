@@ -56,7 +56,7 @@ async function main() {
 
 // Rutas para la página web
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Eventos de Socket.IO
