@@ -34,6 +34,7 @@ async function main() {
 
     rfm95.on('receive', (packet) => {
       // Aquí procesa los datos recibidos desde el ESP32
+      console.log('Received packet:', packet);
       const payload = packet.payload;
       const nodeAddr = payload[0]; // Dirección del nodo (ESP32)
       const temp = (payload[2] << 8) | payload[1]; // Temperatura en C
