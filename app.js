@@ -33,20 +33,25 @@ async function main() {
     await rfm95.startReceive();
 
     rfm95.on('receive', (packet) => {
-      // Aquí procesa los datos recibidos desde el ESP32
-      console.log('Received packet:', packet);
-      const payload = packet.payload;
-      const nodeAddr = payload[0]; // Dirección del nodo (ESP32)
-      const temp = (payload[2] << 8) | payload[1]; // Temperatura en C
-      const humd = (payload[4] << 8) | payload[3]; // Humedad en %
-
-      console.log('Received from Node:', nodeAddr);
-      console.log('Temperature:', temp / 10, 'C');
-      console.log('Humidity:', humd / 10, '%');
-
-      // Emitir los datos a la página web a través de Socket.IO
-      io.emit('update_data', { nodeAddr, temp: temp / 10, humd: humd / 10 });
+      try {
+        // Aquí procesas los datos recibidos desde el ESP32
+        console.log('Received packet:', packet);
+        const payload = packet.payload;
+        const nodeAddr = payload[0]; // Dirección del nodo (ESP32)
+        const temp = (payload[2] << 8) | payload[1]; // Temperatura en C
+        const humd = (payload[4] << 8) | payload[3]; // Humedad en %
+    
+        console.log('Received from Node:', nodeAddr);
+        console.log('Temperature:', temp / 10, 'C');
+        console.log('Humidity:', humd / 10, '%');
+    
+        // Emitir los datos a la página web a través de Socket.IO
+        io.emit('update_data', { nodeAddr, temp: temp / 10, humd: humd / 10 });
+      } catch (error) {
+        console.error('Error al procesar el paquete recibido:', error);
+      }
     });
+    
 
     rfm95.on('receiveError', () => {
       console.log('Received invalid packet');
