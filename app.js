@@ -10,12 +10,14 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 // Opciones de configuración de RFM9x
-const spiSpeedHz = 100000; // Velocidad de la comunicación SPI
-const frequencyMhz = 868.2; // Frecuencia en MHz
+//const spiSpeedHz = 100000; // Velocidad de la comunicación SPI
+//const frequencyMhz = 868.2; // Frecuencia en MHz
 
 const options = {
-  frequencyMhz,
-  spiSpeedHz,
+  frequencyMhz: 868.2,
+  bandwidthHz: 500000,
+  codingRate: 5,
+  spreadingFactor: 7,
 };
 
 // Configurar pines GPIO
