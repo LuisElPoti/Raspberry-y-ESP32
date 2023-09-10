@@ -38,6 +38,8 @@ async function main() {
       const temp = payload.readUInt16LE(2) / 10.0;
       const humd = payload.readUInt16LE(4) / 10.0;
 
+      console.log('Hola mundo');
+
       console.log('Received temperature:', temp, 'C');
       console.log('Received humidity:', humd, '%');
 
