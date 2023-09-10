@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const Gpio = require('onoff');
+const { Gpio } = require('onoff');
 const SPI = require('pi-spi');
 const rfm9x = require('rfm9x');
 
