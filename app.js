@@ -20,9 +20,6 @@ const options = {
   spreadingFactor: 7,
 };
 
-// Configurar pines GPIO
-const resetPin = new Gpio(25, 'out');
-const dio0Pin = new Gpio(22, 'in', 'rising');
 
 const rfm95 = new rfm9x()
 
