@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperatura y Humedad</title>
+</head>
+<body>
+  <h1>Temperatura y Humedad</h1>
+  <div id="data">
+    <p>Temperatura: <span id="temp">--</span>°C</p>
+    <p>Humedad: <span id="humd">--</span>%</p>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('update_data', (data) => {
+      const tempElement = document.getElementById('temp');
+      const humdElement = document.getElementById('humd');
+
+      // Mostrar temperatura con el símbolo de grados Celsius
+      tempElement.textContent = data.temp.toFixed(2) + ' °C';
+
+      // Mostrar humedad con el símbolo de porcentaje
+      humdElement.textContent = data.humd.toFixed(2) + ' %';
+    });
+  </script>
+</body>
+</html>
