@@ -33,17 +33,18 @@ async function main() {
     await rfm95.startReceive();
 
     rfm95.on('receive', (packet) => {
-      const { payload } = packet;
-      const temp = payload.readUInt16LE(2) / 10.0;
-      const humd = payload.readUInt16LE(4) / 10.0;
+      // Aquí procesa los datos recibidos desde el ESP32
+      const payload = packet.payload;
+      const nodeAddr = payload[0]; // Dirección del nodo (ESP32)
+      const temp = (payload[2] << 8) | payload[1]; // Temperatura en C
+      const humd = (payload[4] << 8) | payload[3]; // Humedad en %
 
-      console.log('Hola mundo');
-
-      console.log('Received temperature:', temp, 'C');
-      console.log('Received humidity:', humd, '%');
+      console.log('Received from Node:', nodeAddr);
+      console.log('Temperature:', temp / 10, 'C');
+      console.log('Humidity:', humd / 10, '%');
 
       // Emitir los datos a la página web a través de Socket.IO
-      io.emit('update_data', { temp, humd });
+      io.emit('update_data', { nodeAddr, temp: temp / 10, humd: humd / 10 });
     });
 
     rfm95.on('receiveError', () => {
