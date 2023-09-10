@@ -7,24 +7,20 @@
 <body>
   <h1>Temperatura y Humedad</h1>
   <div id="data">
-    <p>Temperatura: <span id="temp">--</span>°C</p>
-    <p>Humedad: <span id="humd">--</span>%</p>
-  </div>
+    <p><strong>Node Address:</strong> <span id="node-address">N/A</span></p>
+    <p><strong>Temperature:</strong> <span id="temperature">N/A</span> &deg;C</p>
+    <p><strong>Humidity:</strong> <span id="humidity">N/A</span> %</p>
+</div>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
     const socket = io();
 
     socket.on('update_data', (data) => {
-      const tempElement = document.getElementById('temp');
-      const humdElement = document.getElementById('humd');
-
-      // Mostrar temperatura con el símbolo de grados Celsius
-      tempElement.textContent = data.temp.toFixed(2) + ' °C';
-
-      // Mostrar humedad con el símbolo de porcentaje
-      humdElement.textContent = data.humd.toFixed(2) + ' %';
+        document.getElementById('node-address').textContent = data.nodeAddr;
+        document.getElementById('temperature').textContent = data.temp;
+        document.getElementById('humidity').textContent = data.humd;
     });
-  </script>
+</script>
 </body>
 </html>
