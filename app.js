@@ -14,7 +14,7 @@ const io = socketIo(server);
 //const frequencyMhz = 868.2; // Frecuencia en MHz
 
 const options = {
-  frequencyMhz: 868.2,
+  frequencyMhz: 868,
   bandwidthHz: 500000,
   codingRate: 5,
   spreadingFactor: 7,
@@ -38,10 +38,13 @@ async function main() {
         console.dir('Received packet:', packet);
         const payload = packet.payload;
         const nodeAddr = payload[0]; // Dirección del nodo (ESP32)
-        const temp = (payload[2] << 8) | payload[1]; // Temperatura en C
-        const humd = (payload[4] << 8) | payload[3]; // Humedad en %
+        const serverAddr = payload[1]; // Dirección del servidor
+        const temp = (payload[3] << 8) | payload[2]; // Temperatura en C
+        const humd = (payload[5] << 8) | payload[4]; // Humedad en %
+
     
         console.log('Received from Node:', nodeAddr);
+        console.log('Server Address:', serverAddr);
         console.log('Temperature:', temp / 10, 'C');
         console.log('Humidity:', humd / 10, '%');
     
