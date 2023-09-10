@@ -3,7 +3,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const SPI = require('pi-spi');
 const rfm9x = require('rfm9x');
-// const Gpio = require('onoff').Gpio;
+const Gpio = require('onoff').Gpio;
 
 const app = express();
 const server = http.createServer(app);
@@ -18,9 +18,9 @@ const options = {
   spiSpeedHz,
 };
 
-// // Configurar pines GPIO
-// const resetPin = new Gpio(25, 'out');
-// const dio0Pin = new Gpio(22, 'in', 'rising');
+// Configurar pines GPIO
+const resetPin = new Gpio(25, 'out');
+const dio0Pin = new Gpio(22, 'in', 'rising');
 
 const rfm95 = new rfm9x()
 
