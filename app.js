@@ -11,7 +11,7 @@ const io = socketIo(server);
 
 // Configurar pines GPIO
 const resetPin = new Gpio(25, 'out');
-const dio0Pin = new Gpio(22, 'in', 'rising');
+const dio0Pin = new Gpio(5, 'in', 'rising');
 
 // Opciones de configuración de RFM9x
 const spiSpeedHz = 100000; // Velocidad de la comunicación SPI
