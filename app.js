@@ -1,33 +1,32 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const Gpio = require('onoff').Gpio;
 const SPI = require('pi-spi');
 const rfm9x = require('rfm9x');
+// const Gpio = require('onoff').Gpio;
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Configurar pines GPIO
-const resetPin = new Gpio(25, 'out');
-const dio0Pin = new Gpio(22, 'in', 'rising');
-
 // Opciones de configuración de RFM9x
 const spiSpeedHz = 100000; // Velocidad de la comunicación SPI
 const frequencyMhz = 868.2; // Frecuencia en MHz
 
-const rfm95 = new rfm9x();
-
 const options = {
   frequencyMhz,
-  resetPin,
-  dio0Pin,
   spiSpeedHz,
 };
 
+// // Configurar pines GPIO
+// const resetPin = new Gpio(25, 'out');
+// const dio0Pin = new Gpio(22, 'in', 'rising');
+
+const rfm95 = new rfm9x()
+
 async function main() {
   try {
+    // Inicializar el módulo RFM9x primero
     await rfm95.init(options);
     console.log('RFM9x initialized');
 
