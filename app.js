@@ -19,8 +19,6 @@ const options = {
   codingRate: 5,
   spreadingFactor: 7,
   txtTimeOut: 5500,
-  nodeAddr: 0x01,
-  serverAddr: 0x00,
 };
 
 
@@ -41,6 +39,7 @@ async function main() {
     // Evento que se ejecuta cuando se recibe un paquete
     rfm95.on('receive', packet => {
       try {
+        
         // Aquí procesas los datos recibidos desde el ESP32
         console.dir('Received packet:', packet);
         const payload = packet.payload;
