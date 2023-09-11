@@ -18,6 +18,7 @@ const options = {
   bandwidthHz: 500000,
   codingRate: 5,
   spreadingFactor: 7,
+  txtTimeOut: 3000,
 };
 
 
