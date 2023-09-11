@@ -34,7 +34,9 @@ async function main() {
 
     // Iniciar la recepción de paquetes
     await rfm95.startReceive();
+    console.log('RFM9x receive mode started');
 
+    // Evento que se ejecuta cuando se recibe un paquete
     rfm95.on('receive', (packet) => {
       try {
         // Aquí procesas los datos recibidos desde el ESP32
