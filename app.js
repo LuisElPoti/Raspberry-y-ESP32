@@ -18,7 +18,9 @@ const options = {
   bandwidthHz: 500000,
   codingRate: 5,
   spreadingFactor: 7,
-  txtTimeOut: 3000,
+  txtTimeOut: 5500,
+  nodeAddr: 0x01,
+  serverAddr: 0x00,
 };
 
 
