@@ -42,6 +42,8 @@ async function main() {
         
         // Aquí procesas los datos recibidos desde el ESP32
         console.dir('Received packet:', packet);
+        console.dir(packet, 'Received packet:');
+
         const payload = packet.payload;
         const nodeAddr = payload[0]; // Dirección del nodo (ESP32)
         const serverAddr = payload[1]; // Dirección del servidor
