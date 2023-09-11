@@ -23,6 +23,8 @@ const options = {
 
 const rfm95 = new rfm9x()
 
+rfm95.debug = true;
+
 async function main() {
   try {
     // Inicializar el módulo RFM9x primero
